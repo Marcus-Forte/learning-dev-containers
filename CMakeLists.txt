@@ -3,16 +3,23 @@ project(dev_container)
 
 set(CMAKE_CXX_STANDARD 20)
 
-# set(CMAKE_CXX_CLANG_TIDY clang-tidy
-# -checks=*,-llvm*,-modernize-use-*,-google*,-readability-magic-numbers,-cppcoreguidelines-avoid-magic-numbers
-# # -warnings-as-errors=*
-# -header-filter=.*
-# )
+option(USE_CLANG_TIDY "Use clang" OFF)
 
-add_compile_options(
-     -Wunused-variable
-     -Werror
-)
+if(USE_CLANG_TIDY)
+     set(CMAKE_CXX_CLANG_TIDY clang-tidy
+     --checks=modernize-*,readability-*,performance-*,-modernize-use-trailing-return-type
+     --header-filter=.*
+     --warnings-as-errors=*
+     )
+     add_compile_options(
+          -Wunused-variable
+          -Wunused-function
+          -Wunused-parameter
+          -Werror
+     )
+endif()
+
+
 
 find_package(GTest REQUIRED)
 find_package(Eigen3 REQUIRED)
@@ -24,12 +31,6 @@ target_link_libraries(mylib Eigen3::Eigen)
 
 add_executable(main src/main.cpp)
 target_link_libraries(main mylib)
-
-# # format
-# add_custom_command(TARGET main PRE_BUILD 
-# COMMAND clang-format ARGS -i 
-# "${CMAKE_SOURCE_DIR}/src/*.cpp"
-# "${CMAKE_SOURCE_DIR}/include/*.h")
 
 # Testing
 include(GoogleTest)

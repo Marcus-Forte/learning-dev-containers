@@ -4,16 +4,10 @@
 
 #include "lib.h"
 
-void fun(int a) {
-
-}
-
+void some_function(std::string val) { std::cout << val << std::endl; }
 
 int main() {
-  auto res = Adder::sumInt(5, 10);
-  fun(res);
+  Eigen::Vector2d v{1.0, 0.0};
 
-  Eigen::Vector3f vec3;
-
-  std::cout << std::format("Hello! {}", res) << std::endl;
+  some_function("Hello world");
 }

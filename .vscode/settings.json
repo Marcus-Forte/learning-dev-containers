@@ -1,9 +1,0 @@
-{
-    "cmake.options.statusBarVisibility": "compact",
-    "C_Cpp.default.compileCommands": "/workspaces/dev_containers/build/compile_commands.json",
-    "files.associations": {
-        "format": "cpp",
-        "dense": "cpp",
-        "iostream": "cpp"
-    },
-}
