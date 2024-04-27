@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 20)
 option(USE_CLANG_TIDY "Use clang" OFF)
 
 if(USE_CLANG_TIDY)
+     message(STATUS "Using clang-tidy")
      set(CMAKE_CXX_CLANG_TIDY clang-tidy
      --checks=modernize-*,readability-*,performance-*,-modernize-use-trailing-return-type
      --header-filter=.*
@@ -19,11 +20,8 @@ if(USE_CLANG_TIDY)
      )
 endif()
 
-
-
 find_package(GTest REQUIRED)
 find_package(Eigen3 REQUIRED)
-
 
 add_library(mylib src/lib.cpp)
 target_include_directories(mylib PUBLIC include)
